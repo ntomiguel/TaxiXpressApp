@@ -37,14 +37,6 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-
     <div class="navbar navbar-default navbar-static-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -52,22 +44,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href=<%= root_path %>>TaxiXpressApp</a>
+        <a class="navbar-brand" href=<%= root_path %>>Taxi<strong>Xpress</strong>App</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Booking", bookings_path  %></li>
-            <li><%= link_to "Categories", categories_path  %></li>
-            <li><%= link_to "Car registration", cars_path  %></li>
-            <li><%= link_to "Registration drivers.", drivers_path  %></li>
+            <%= render 'layouts/menu' if current_user %>
           </ul>
           <p class="navbar-text pull-right">
             <% if user_signed_in? %>
               Logged in as <strong><%= current_user.email %></strong>.
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <%= link_to 'Editar Perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+              <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+              <%= link_to "Ingresar", new_user_session_path, :class => 'navbar-link'  %>
             <% end %>
           </p>
         </div>
@@ -76,25 +64,16 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-        <div class="col-lg-3">
-          <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
+
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <p class="sub-footer">Al hacer clic en "Crear cuenta", aceptas los <a href="#">Términos y las Condiciones</a> de <strong>TaxiXpressApp</strong> y la <a href="#">Política de privacidad.</a></p>
+        <p class="sub-footer">&copy; <strong>TaxiXpressApp</strong> - 2015</p>
       </footer>
 
     </div> <!-- /container -->
